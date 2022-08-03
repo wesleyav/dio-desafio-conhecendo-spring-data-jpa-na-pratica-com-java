@@ -3,6 +3,8 @@ package com.github.wesleyav.academiadigital.controllers;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -49,7 +51,7 @@ public class MatriculaController {
 
 	@PostMapping(value = "/matriculas/", produces = MediaType.APPLICATION_JSON_VALUE)
 	@Operation(summary = "Endpoint para criar Matrícula")
-	public ResponseEntity<Matricula> create(@RequestBody Matricula matricula) {
+	public ResponseEntity<Matricula> create(@Valid @RequestBody Matricula matricula) {
 		Matricula obj = matriculaService.save(matricula);
 		return new ResponseEntity<Matricula>(obj, HttpStatus.CREATED);
 	}

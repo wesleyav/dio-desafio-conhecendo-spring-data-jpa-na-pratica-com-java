@@ -3,6 +3,8 @@ package com.github.wesleyav.academiadigital.controllers;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -49,7 +51,7 @@ public class AlunoController {
 
 	@PostMapping(value = "/alunos/", produces = MediaType.APPLICATION_JSON_VALUE)
 	@Operation(summary = "Endpoint para criar Aluno")
-	public ResponseEntity<Aluno> create(@RequestBody Aluno aluno) {
+	public ResponseEntity<Aluno> create(@Valid @RequestBody Aluno aluno) {
 		Aluno obj = alunoService.save(aluno);
 		return new ResponseEntity<Aluno>(obj, HttpStatus.CREATED);
 	}

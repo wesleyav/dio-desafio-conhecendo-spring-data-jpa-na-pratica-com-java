@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,6 +27,7 @@ public class AvaliacaoFisica {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Positive(message = "O Id do aluno precisa ser positivo.")
 	private Long id;
 
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -34,8 +37,12 @@ public class AvaliacaoFisica {
 	private LocalDateTime dataDaAvaliacao = LocalDateTime.now();
 
 	@Column(name = "peso_atual")
+	@NotNull(message = "Preencha o campo corretamente.")
+	@Positive(message = "'${validatedValue}' precisa ser positivo.")
 	private double peso;
 
+	@NotNull(message = "Preencha o campo corretamente.")
+	@Positive(message = "'${validatedValue}' precisa ser positivo.")
 	@Column(name = "altura_atual")
 	private double altura;
 
